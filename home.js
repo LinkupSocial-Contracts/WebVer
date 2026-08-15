@@ -11,7 +11,7 @@ async function loadPosts()
 {
     const { data, error } = await supabaseClient
         .from("posts")
-        .select('id, "user_id", title, content, created_at')
+        .select('id, "user_id", title, user_info_name, content, created_at')
         .order("created_at", { ascending: false });
 
     if (error)
@@ -23,9 +23,9 @@ async function loadPosts()
     const postsContainer = document.getElementById("content");
 
     postsContainer.innerHTML = data.map(post => `
-        <article class="post" id="${post.id}">
+        <article class="post" id="${post.user_id}">
             <div class="post_header">
-                <span class="post_user">${post.user_id}</span>
+                <span class="post_user">${post.user_info_name}</span>
 
                 <span class="post_date">
                     ${new Date(post.created_at).toLocaleDateString()}
@@ -40,6 +40,20 @@ async function loadPosts()
     `).join("");
 }
 
+async function logout()
+{
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error)
+    {
+        console.error("Logout error:", error);
+        return;
+    }
+
+    console.log("Logged out successfully.");
+
+    window.location.href = "./Authentication/Signin/";
+}
 
 function loadPage()
 {
@@ -47,19 +61,28 @@ function loadPage()
 }
 
 
-function OnLoad()
+async function OnLoad()
 {
-    if (window.isLoggedIn)
+    const { data: { session } } =
+    await supabaseClient.auth.getSession();
+
+if (session)
+{
+    const elements =
+        document.getElementsByClassName("loggedInShow");
+
+    for (const element of elements)
     {
-        const elements = document.getElementsByClassName("loggedInShow");
-
-        for (const element of elements)
-        {
-            element.style.display = "";
-        }
-
-        document.title = "Linkup Social | Logged In";
+        element.style.display = "";
     }
+
+    document.title = "Linkup Social | Logged In";
+}
+
+else
+{
+    window.location.href = "./Authentication/Signin/";
+}
 }
 
 
