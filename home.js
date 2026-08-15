@@ -1,6 +1,14 @@
 function OnLoad() 
 {
     if (window.isLoggedIn) {
-    document.getElementById("accountSettings").style.display = "";
+const elements = document.getElementsByClassName("loggedInShow");
+
+for (const element of elements) {
+    element.style.display = "";
 }
+
+document.title = "Linkup Social | Logged In";
+}
+
+
 }

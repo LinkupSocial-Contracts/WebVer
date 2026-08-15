@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <link rel="stylesheet" href="style001.css">
-    </head>
-    <body>
-        <div id="header">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linkup Social | Logged Out</title>
+    <link rel="stylesheet" href="style001.css">
+</head>
 
-        </div>
-        <div id="nav">
-            <a href="Authentication/Signup/" class="nav_btn">Sign Up</a>
-            <a href="Authentication/Signin/" class="nav_btn">Sign In</a>
-            <a href="Authentication/Account/" class="nav_btn" id="accountSettings" style="display: none;">Account Settings</a>
-        </div>
-        <div id="content">
+<body>
 
-        </div>
-        <script src="home.js"></script>
-    </body>
+    <header id="header">
+        <h1>Linkup</h1>
+    </header>
+
+    <nav id="nav">
+        <a href="Authentication/Signup/" class="nav_btn">Sign Up</a>
+        <a href="Authentication/Signin/" class="nav_btn">Sign In</a>
+        <a href="Authentication/Account/"
+           class="nav_btn loggedInShow"
+           id="accountSettings"
+           style="display: none;">
+            Account Settings
+        </a>
+    </nav>
+
+    <main id="content">
+
+        <!-- JavaScript can create posts here -->
+
+        <article class="post" id="0000-0000-0000-0000">
+            <div class="post_header">
+                <span class="post_user">Announcments</span>
+                <span class="post_date">August 15, 2026</span>
+            </div>
+
+            <div class="post_content">
+                This is an example post.
+            </div>
+        </article>
+
+    </main>
+
+    <script src="home.js"></script>
+
+</body>
 </html>
