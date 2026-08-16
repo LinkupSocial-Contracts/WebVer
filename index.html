@@ -15,15 +15,15 @@
     </header>
 
     <nav id="nav">
-        <a href="Authentication/Signup/" class="nav_btn">Sign Up</a>
-        <a href="Authentication/Signin/" class="nav_btn">Sign In</a>
+        <a href="Authentication/Signup/" class="nav_btn loggedInHide">Sign Up</a>
+        <a href="Authentication/Signin/" class="nav_btn loggedInHide">Sign In</a>
         <a href="Authentication/Account/"
            class="nav_btn loggedInShow"
            id="accountSettings"
            style="display: none;">
             Account Settings
         </a>
-        <a href="#" class="nav_btn loggedInShow" onclick="logout()" style="display: none;">Log Out</a>
+        <a href="#" class="nav_btn loggedInShow" id="logoutBtn" onclick="logout()" style="display: none;">Log Out</a>
     </nav>
 
     <main id="content">

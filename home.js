@@ -70,11 +70,20 @@ if (session)
 {
     const elements =
         document.getElementsByClassName("loggedInShow");
+    const elementsHide =
+        document.getElementsByClassName("loggedInHide");
 
     for (const element of elements)
     {
         element.style.display = "";
     }
+
+    for (const elementHide of elementsHide)
+    {
+        elementHide.style.display = "none";
+    }
+
+
 
     document.title = "Linkup Social | Logged In";
 }
