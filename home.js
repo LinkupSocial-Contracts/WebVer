@@ -22,22 +22,21 @@ async function loadPosts()
 
     const postsContainer = document.getElementById("content");
 
-    postsContainer.innerHTML = data.map(post => `
-        <article class="post" id="${post.user_id}">
-            <div class="post_header">
-                <span class="post_user">${post.user_info_name}</span>
+   postElement.innerHTML = `
+    <div class="post_header">
+        <div class="post_user">
+            ${escapeHTML(username)}
+        </div>
 
-                <span class="post_date">
-                    ${new Date(post.created_at).toLocaleDateString()}
-                </span>
-            </div>
+        <div class="post_date">
+            ${escapeHTML(postDate)}
+        </div>
+    </div>
 
-            <div class="post_content">
-                <h2>${post.title}</h2>
-                <p>${post.content}</p>
-            </div>
-        </article>
-    `).join("");
+    <div class="post_content">
+        ${escapeHTML(post.title || "")}
+    </div>
+`;
 }
 
 async function logout()
@@ -52,7 +51,7 @@ async function logout()
 
     console.log("Logged out successfully.");
 
-    window.location.href = "./Authentication/Signin/";
+    window.location.href = "./Auth/Signin/";
 }
 
 function loadPage()

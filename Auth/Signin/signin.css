@@ -1,0 +1,353 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #313338;
+
+    color: #dbdee1;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.page {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+/* =========================================
+   LOGIN CARD
+   ========================================= */
+
+.login_card {
+
+    width: 100%;
+    max-width: 480px;
+
+    background: #2b2d31;
+
+    border-radius: 8px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.35);
+
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #5865f2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    user-select: none;
+
+}
+
+
+/* =========================================
+   HEADING
+   ========================================= */
+
+.login_card h1 {
+
+    margin: 0;
+
+    text-align: center;
+
+    color: #f2f3f5;
+
+    font-size: 25px;
+
+    font-weight: 600;
+
+}
+
+.subtitle {
+
+    margin: 8px 0 28px;
+
+    text-align: center;
+
+    color: #b5bac1;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.form_group {
+
+    margin-bottom: 20px;
+
+}
+
+.form_group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b5bac1;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+.form_group label span {
+
+    color: #f23f42;
+
+}
+
+
+.form_group input {
+
+    width: 100%;
+
+    height: 44px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #1e1f22;
+
+    border-radius: 4px;
+
+    outline: none;
+
+    background: #1e1f22;
+
+    color: #dbdee1;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.15s,
+        background 0.15s;
+
+}
+
+.form_group input::placeholder {
+
+    color: #6d7178;
+
+}
+
+.form_group input:focus {
+
+    border-color: #5865f2;
+
+    background: #1e1f22;
+
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+   ========================================= */
+
+.forgot {
+
+    margin-top: -10px;
+
+    margin-bottom: 20px;
+
+}
+
+.forgot a {
+
+    color: #00a8fc;
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+}
+
+.forgot a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   ERROR
+   ========================================= */
+
+.login_error {
+
+    min-height: 20px;
+
+    margin-bottom: 8px;
+
+    color: #f23f42;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+   ========================================= */
+
+#loginButton {
+
+    width: 100%;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #5865f2;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s,
+        transform 0.1s;
+
+}
+
+#loginButton:hover {
+
+    background: #4752c4;
+
+}
+
+#loginButton:active {
+
+    transform: translateY(1px);
+
+}
+
+#loginButton:disabled {
+
+    background: #3f4785;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   REGISTER
+   ========================================= */
+
+.register {
+
+    margin: 18px 0 0;
+
+    color: #949ba4;
+
+    font-size: 13px;
+
+}
+
+.register a {
+
+    color: #00a8fc;
+
+    text-decoration: none;
+
+}
+
+.register a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 520px) {
+
+    .page {
+
+        padding: 0;
+
+        align-items: flex-start;
+
+    }
+
+    .login_card {
+
+        min-height: 100vh;
+
+        max-width: none;
+
+        border-radius: 0;
+
+        padding: 30px 24px;
+
+        box-shadow: none;
+
+    }
+
+}
