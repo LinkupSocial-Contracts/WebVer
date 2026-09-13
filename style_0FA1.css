@@ -1,0 +1,466 @@
+    /* =========================================
+           GENERAL
+           ========================================= */
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #313338;
+            color: #dbdee1;
+        }
+
+        body {
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* =========================================
+           SIDEBAR
+           ========================================= */
+        #sidebar {
+            width: 240px;
+            min-width: 240px;
+            height: 100vh;
+            background: #1e1f22;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #111214;
+        }
+
+        /* =========================================
+           BRAND
+           ========================================= */
+        .sidebar_brand {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            border-bottom: 1px solid #111214;
+        }
+
+        .brand_icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: #5865f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           SIDEBAR SECTIONS
+           ========================================= */
+        .sidebar_section {
+            padding: 18px 10px 0;
+        }
+
+        .sidebar_title {
+            display: block;
+            padding: 0 8px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #949ba4;
+        }
+
+        /* =========================================
+           SIDEBAR BUTTONS
+           ========================================= */
+        .sidebar_btn {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            margin-bottom: 3px;
+            border-radius: 5px;
+            color: #b5bac1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .sidebar_btn:hover {
+            background: #35373c;
+            color: #ffffff;
+        }
+
+        .sidebar_btn.active {
+            background: #404249;
+            color: #ffffff;
+        }
+
+        .sidebar_icon {
+            width: 28px;
+            margin-right: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* =========================================
+           USER AREA
+           ========================================= */
+        .sidebar_user {
+            margin-top: auto;
+            height: 60px;
+            background: #232428;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .user_avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #5865f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user_info {
+            flex: 1;
+            margin-left: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .user_info strong {
+            color: #ffffff;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user_info span {
+            color: #949ba4;
+            font-size: 11px;
+        }
+
+        .user_settings {
+            border: none;
+            background: transparent;
+            color: #b5bac1;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* =========================================
+           MAIN APP
+           ========================================= */
+        #app {
+            flex: 1;
+            min-width: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #313338;
+        }
+
+        /* =========================================
+           HEADER
+           ========================================= */
+        #header {
+            height: 55px;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            background: #313338;
+            border-bottom: 1px solid #1f2023;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .channel_title {
+            display: flex;
+            align-items: center;
+        }
+
+        .channel_hash {
+            font-size: 28px;
+            font-weight: bold;
+            color: #949ba4;
+            margin-right: 8px;
+        }
+
+        .channel_title h1 {
+            margin: 0;
+            font-size: 16px;
+            color: #f2f3f5;
+        }
+
+        .header_actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .header_actions button {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: #b5bac1;
+            font-size: 17px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .header_actions button:hover {
+            background: #404249;
+            color: #ffffff;
+        }
+
+        /* =========================================
+           CONTENT
+           ========================================= */
+        #content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 30px 100px;
+            background: #313338;
+        }
+
+        #content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #content::-webkit-scrollbar-track {
+            background: #2b2d31;
+        }
+
+        #content::-webkit-scrollbar-thumb {
+            background: #1a1b1e;
+            border-radius: 10px;
+        }
+
+        /* =========================================
+           WELCOME
+           ========================================= */
+        .welcome {
+            padding: 25px 0 30px;
+            border-bottom: 1px solid #3f4147;
+            margin-bottom: 10px;
+        }
+
+        .welcome_icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #5865f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 6px;
+            color: #f2f3f5;
+            font-size: 28px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #949ba4;
+            font-size: 14px;
+        }
+
+        /* ========================================
+           DISCORD-STYLE POSTS
+           ======================================== */
+        .post {
+            width: 100%;
+            margin: 0;
+            padding: 6px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            display: flex;
+            gap: 12px;
+            transition: background 0.1s ease;
+        }
+
+        .post:hover {
+            background: #2e3035;
+        }
+
+        .post_avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #5865f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .post_body {
+            flex: 1;
+        }
+
+        .post_header {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+        }
+
+        .post_user {
+            color: #f2f3f5;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .post_date {
+            color: #949ba4;
+            font-size: 11px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .post_content {
+            padding-top: 2px;
+            padding-bottom: 4px;
+            color: #dbdee1;
+            font-size: 15px;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .delete_post {
+            background: transparent;
+            border: none;
+            color: #f23f43;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .delete_post:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           MESSAGE BAR
+           ========================================= */
+        #message_bar {
+            height: 70px;
+            padding: 10px 20px;
+            background: #313338;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #messageInput {
+            flex: 1;
+            height: 44px;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            padding: 0 15px;
+            background: #383a40;
+            color: #dbdee1;
+            font-size: 14px;
+        }
+
+        #messageInput::placeholder {
+            color: #949ba4;
+        }
+
+        .message_add,
+        .message_button {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #404249;
+            color: #b5bac1;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .message_add:hover,
+        .message_button:hover {
+            background: #5865f2;
+            color: white;
+        }
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+        @media (max-width: 700px) {
+            #sidebar {
+                width: 70px;
+                min-width: 70px;
+            }
+
+            .sidebar_brand {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .sidebar_brand span {
+                display: none;
+            }
+
+            .sidebar_title {
+                display: none;
+            }
+
+            .sidebar_btn {
+                justify-content: center;
+                font-size: 0;
+            }
+
+            .sidebar_icon {
+                margin: 0;
+                font-size: 20px;
+            }
+
+            .brand_icon {
+                margin: 0;
+            }
+
+            .user_info,
+            .user_settings {
+                display: none;
+            }
+
+            .sidebar_user {
+                justify-content: center;
+            }
+
+            #content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .welcome h2 {
+                font-size: 22px;
+            }
+        }

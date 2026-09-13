@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Linkup Social | Sign Up</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="../../CDN/LinkupSocialIco.png">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #313338;
+            color: #dbdee1;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* ================================
+           BACKGROUND
+           ================================ */
+
+        #background {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    #3b3d44 0%,
+                    #313338 45%,
+                    #1e1f22 100%
+                );
+
+            z-index: -1;
+        }
+
+
+        /* ================================
+           SIGNUP CARD
+           ================================ */
+
+        #signupCard {
+            width: 100%;
+            max-width: 480px;
+
+            padding: 32px;
+
+            background: #2b2d31;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 8px 24px
+                rgba(0, 0, 0, 0.35);
+
+            margin: 20px;
+        }
+
+
+        /* ================================
+           HEADER
+           ================================ */
+
+        #logo {
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #5865f2;
+
+            color: white;
+
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        #signupTitle {
+            margin: 0;
+
+            text-align: center;
+
+            color: #f2f3f5;
+
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        #signupSubtitle {
+            margin: 8px 0 24px;
+
+            text-align: center;
+
+            color: #b5bac1;
+
+            font-size: 14px;
+        }
+
+
+        /* ================================
+           FORM
+           ================================ */
+
+        .form_group {
+            margin-bottom: 18px;
+        }
+
+        .form_label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #b5bac1;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .required {
+            color: #ed4245;
+        }
+
+
+        input {
+            width: 100%;
+
+            height: 44px;
+
+            padding: 10px 12px;
+
+            border: none;
+            outline: none;
+
+            border-radius: 3px;
+
+            background: #1e1f22;
+
+            color: #f2f3f5;
+
+            font-size: 15px;
+
+            transition:
+                background 0.15s ease,
+                box-shadow 0.15s ease;
+        }
+
+        input:hover {
+            background: #202225;
+        }
+
+        input:focus {
+            background: #1e1f22;
+
+            box-shadow:
+                0 0 0 1px #5865f2;
+        }
+
+        input::placeholder {
+            color: #6d6f78;
+        }
+
+
+        /* ================================
+           BUTTON
+           ================================ */
+
+        #signupButton {
+            width: 100%;
+
+            height: 44px;
+
+            margin-top: 4px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            background: #5865f2;
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease;
+        }
+
+        #signupButton:hover {
+            background: #4752c4;
+        }
+
+        #signupButton:active {
+            background: #3c45a5;
+        }
+
+        #signupButton:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ================================
+           ERROR
+           ================================ */
+
+        #signupError {
+            min-height: 20px;
+
+            margin: 12px 0 0;
+
+            color: #f23f42;
+
+            font-size: 13px;
+
+            line-height: 18px;
+        }
+
+
+        /* ================================
+           LOGIN LINK
+           ================================ */
+
+        #loginText {
+            margin-top: 18px;
+
+            color: #949ba4;
+
+            font-size: 14px;
+        }
+
+        #loginLink {
+            color: #00a8fc;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+        #loginLink:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================================
+           PASSWORD REQUIREMENTS
+           ================================ */
+
+        #passwordHelp {
+            margin-top: 7px;
+
+            color: #949ba4;
+
+            font-size: 11px;
+        }
+
+
+        /* ================================
+           MOBILE
+           ================================ */
+
+        @media (max-width: 520px) {
+
+            body {
+                align-items: flex-start;
+            }
+
+            #signupCard {
+                margin-top: 40px;
+
+                padding: 24px;
+
+                box-shadow: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div id="background"></div>
+
+
+    <main id="signupCard">
+
+        <div id="logo">
+            L
+        </div>
+
+
+        <h1 id="signupTitle">
+            Create an account
+        </h1>
+
+
+        <p id="signupSubtitle">
+            Join Linkup Social today
+        </p>
+
+
+        <form id="signupForm">
+
+
+            <!-- USERNAME -->
+
+            <div class="form_group">
+
+                <label
+                    class="form_label"
+                    for="username">
+
+                    Username
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    maxlength="32"
+                    required>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form_group">
+
+                <label
+                    class="form_label"
+                    for="email">
+
+                    Email
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form_group">
+
+                <label
+                    class="form_label"
+                    for="password">
+
+                    Password
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
+
+                <div id="passwordHelp">
+                    Password must be at least 6 characters.
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form_group">
+
+                <label
+                    class="form_label"
+                    for="confirmPassword">
+
+                    Confirm Password
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Enter your password again"
+                    autocomplete="new-password"
+                    required>
+
+            </div>
+
+
+            <button
+                id="signupButton"
+                type="submit">
+
+                Create Account
+
+            </button>
+
+
+            <div id="signupError"></div>
+
+
+        </form>
+
+
+        <div id="loginText">
+
+            Already have an account?
+
+            <a
+                id="loginLink"
+                href="../Signin/">
+
+                Sign In
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://paotmlgoayixvwozvohp.supabase.co";
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_XX-Ofl8fQ1JL7n6Ei6kFdw_sb5bT-xk";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY,
+                {
+                    auth: {
+                        persistSession: true,
+                        autoRefreshToken: true,
+                        detectSessionInUrl: true
+                    }
+                }
+            );
+
+
+        /* ================================
+           ELEMENTS
+           ================================ */
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const confirmPasswordInput =
+            document.getElementById("confirmPassword");
+
+        const signupButton =
+            document.getElementById("signupButton");
+
+        const signupError =
+            document.getElementById("signupError");
+
+
+        /* ================================
+           CHECK EXISTING SESSION
+           ================================ */
+
+        async function checkExistingSession() {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.getSession();
+
+
+            if (error) {
+
+                console.error(
+                    "Session check error:",
+                    error
+                );
+
+                return;
+            }
+
+
+            if (data.session) {
+
+                window.location.href =
+                    "../../index.html";
+
+            }
+
+        }
+
+
+        checkExistingSession();
+
+
+        /* ================================
+           SIGNUP
+           ================================ */
+
+        signupForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                signupError.textContent = "";
+
+
+                const username =
+                    usernameInput.value.trim();
+
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+                const confirmPassword =
+                    confirmPasswordInput.value;
+
+
+                /* ============================
+                   VALIDATION
+                   ============================ */
+
+                if (!username) {
+
+                    signupError.textContent =
+                        "Please enter a username.";
+
+                    return;
+                }
+
+
+                if (username.length < 3) {
+
+                    signupError.textContent =
+                        "Username must be at least 3 characters.";
+
+                    return;
+                }
+
+
+                if (!email) {
+
+                    signupError.textContent =
+                        "Please enter your email.";
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    signupError.textContent =
+                        "Password must be at least 6 characters.";
+
+                    return;
+                }
+
+
+                if (password !== confirmPassword) {
+
+                    signupError.textContent =
+                        "Passwords do not match.";
+
+                    return;
+                }
+
+
+                signupButton.disabled = true;
+
+                signupButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    /* ============================
+                       CREATE AUTH USER
+                       ============================ */
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient.auth.signUp({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                    if (error) {
+
+                        console.error(
+                            "Signup error:",
+                            error
+                        );
+
+                        signupError.textContent =
+                            error.message;
+
+                        return;
+                    }
+
+
+                    if (!data.user) {
+
+                        signupError.textContent =
+                            "Unable to create account.";
+
+                        return;
+                    }
+
+
+                    /* ============================
+                       CREATE PROFILE
+                       ============================ */
+
+                    const {
+                        error: profileError
+                    } =
+                        await supabaseClient
+                            .from("profiles")
+                            .insert({
+
+                                id:
+                                    data.user.id,
+
+                                username:
+                                    username,
+
+                                is_platformadmin:
+                                    false
+
+                            });
+
+
+                    if (profileError) {
+
+                        console.error(
+                            "Profile creation error:",
+                            profileError
+                        );
+
+                        signupError.textContent =
+                            "Account created, but your profile could not be created: " +
+                            profileError.message;
+
+                        return;
+                    }
+
+
+                    /* ============================
+                       SUCCESS
+                       ============================ */
+
+                    signupButton.textContent =
+                        "Account Created!";
+
+
+                    window.location.href =
+                        "../../index.html";
+
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Unexpected signup error:",
+                        error
+                    );
+
+                    signupError.textContent =
+                        "Something went wrong. Please try again.";
+
+                }
+                finally {
+
+                    signupButton.disabled = false;
+
+                    if (
+                        signupButton.textContent ===
+                        "Creating Account..."
+                    ) {
+
+                        signupButton.textContent =
+                            "Create Account";
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
