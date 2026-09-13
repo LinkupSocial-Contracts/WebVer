@@ -22,13 +22,127 @@ const supabaseClient = window.supabase.createClient(
 
 const urlParams = new URLSearchParams(window.location.search);
 
-// Example:
-// ?redirect=social
-// ?redirect=settings
-// ?redirect=home
+const redirect = (urlParams.get("redirect") || "")
+    .trim()
+    .toLowerCase();
 
-const redirect = urlParams.get("redirect");
-const redirect = urlParams.get("loggedin");
+console.log("Current URL:", window.location.href);
+console.log("Redirect argument:", redirect);
+
+
+// ==========================================
+// REDIRECT FUNCTION
+// ==========================================
+
+function handleRedirect()
+{
+    console.log("Handling redirect:", redirect);
+
+    switch (redirect)
+    {
+        case "social":
+
+            console.log("Redirecting to Social");
+
+            window.location.href = "../../";
+            break;
+
+
+        case "home_ads":
+
+            console.log("Redirecting to Home Ads");
+
+            window.location.href = "../../ads";
+            break;
+
+
+        case "settings":
+
+            console.log("Redirecting to Settings");
+
+            window.location.href = "../../Account/";
+            break;
+
+
+        case "sign_profile":
+
+            console.log("Redirecting to Signup");
+
+            window.location.href = "../Signup/";
+            break;
+
+
+        default:
+
+            console.log(
+                "No redirect argument. Using default."
+            );
+
+            window.location.href = "../../index.html";
+            break;
+    }
+}
+
+
+// ==========================================
+// CHECK IF ALREADY LOGGED IN
+// ==========================================
+
+async function checkExistingSession()
+{
+    try
+    {
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+        if (error)
+        {
+            console.error(
+                "Session check error:",
+                error
+            );
+
+            return;
+        }
+
+
+        // User is already logged in
+        if (data.session)
+        {
+            console.log(
+                "User is already logged in."
+            );
+
+            console.log(
+                "User ID:",
+                data.session.user.id
+            );
+
+            handleRedirect();
+
+            return;
+        }
+
+
+        console.log(
+            "No existing session. Showing login page."
+        );
+    }
+    catch (err)
+    {
+        console.error(
+            "Failed to check session:",
+            err
+        );
+    }
+}
+
+
+// ==========================================
+// RUN SESSION CHECK
+// ==========================================
+
+checkExistingSession();
 
 
 // ==========================================
@@ -53,9 +167,9 @@ document.getElementById("loginForm").addEventListener(
         errorElement.textContent = "";
 
 
-        // ------------------------------
-        // Validate input
-        // ------------------------------
+        // ==========================================
+        // VALIDATE
+        // ==========================================
 
         if (!email || !password)
         {
@@ -66,9 +180,9 @@ document.getElementById("loginForm").addEventListener(
         }
 
 
-        // ------------------------------
-        // Login
-        // ------------------------------
+        // ==========================================
+        // LOGIN
+        // ==========================================
 
         const { data, error } =
             await supabaseClient.auth.signInWithPassword({
@@ -77,9 +191,9 @@ document.getElementById("loginForm").addEventListener(
             });
 
 
-        // ------------------------------
-        // Login error
-        // ------------------------------
+        // ==========================================
+        // LOGIN ERROR
+        // ==========================================
 
         if (error)
         {
@@ -95,9 +209,9 @@ document.getElementById("loginForm").addEventListener(
         }
 
 
-        // ------------------------------
-        // Make sure session exists
-        // ------------------------------
+        // ==========================================
+        // CHECK SESSION
+        // ==========================================
 
         if (!data.session)
         {
@@ -113,55 +227,9 @@ document.getElementById("loginForm").addEventListener(
 
 
         // ==========================================
-        // REDIRECT ARGUMENT HANDLING
+        // REDIRECT
         // ==========================================
-        switch (redirect)
-        {
-            case "social":
 
-                // Go to the main social page
-                window.location.href =
-                    "../../";
-
-                break;
-
-
-            case "home_ads":
-
-                // Go to the main home page
-                window.location.href =
-                    "../../ads";
-
-                break;
-
-
-            case "settings":
-
-                // Go to account settings
-                window.location.href =
-                    "../Account/";
-
-                break;
-
-
-            case "sign_profile":
-
-                // Go to signup page
-                window.location.href =
-                    "../Signup/";
-
-                break;
-
-
-            default:
-
-                // No redirect argument,
-                // or an unknown redirect argument.
-
-                window.location.href =
-                    "../../index.html";
-
-                break;
-        }
+        handleRedirect();
     }
 );
