@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-us" theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Linkup Social | Direct Messages</title>
+
+    <link rel="stylesheet"
+          href="../../../style_0FA1.css">
+    <link rel="stylesheet" href="styles_0FA9.css">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MAIN SIDEBAR
+    =========================================== -->
+
+    <aside id="sidebar">
+
+        <div class="sidebar_brand">
+
+            <div class="brand_icon">
+                <img
+                    src="../../../CDN/Supabase64.png"
+                    width="24"
+                >
+            </div>
+
+            <span>SupaSocial</span>
+
+        </div>
+
+
+        <div class="sidebar_section">
+
+            <span class="sidebar_title">
+                SUPASOCIAL
+            </span>
+
+            <a href="../../../"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    ⌂
+                </span>
+
+                Home
+
+            </a>
+
+
+            <a href="?isfriend=false"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    ♧
+                </span>
+
+                Friends
+
+            </a>
+
+
+            <a href="#"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    🔔
+                </span>
+
+                Notifications
+
+            </a>
+
+        </div>
+
+
+        <div class="sidebar_section">
+
+            <span class="sidebar_title">
+                ACCOUNT
+            </span>
+
+
+            <a href="../../../Auth/Signup/"
+               class="sidebar_btn loggedInHide">
+
+                <span class="sidebar_icon">
+                    ＋
+                </span>
+
+                Sign Up
+
+            </a>
+
+
+            <a href="../../../Auth/Signin/"
+               class="sidebar_btn loggedInHide">
+
+                <span class="sidebar_icon">
+                    →
+                </span>
+
+                Sign In
+
+            </a>
+
+
+            <a href="../Account/"
+               class="sidebar_btn loggedInShow"
+               id="accountSettings"
+               style="display:none;">
+
+                <span class="sidebar_icon">
+                    ⚙
+                </span>
+
+                Account Settings
+
+            </a>
+
+
+            <a href="#"
+               class="sidebar_btn loggedInShow"
+               id="logoutBtn"
+               onclick="logout()"
+               style="display:none;">
+
+                <span class="sidebar_icon">
+                    ↪
+                </span>
+
+                Log Out
+
+            </a>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="sidebar_user">
+
+            <div class="user_avatar">
+
+                <img
+                    src="../../../CDN/User64.png"
+                    width="32"
+                >
+
+            </div>
+
+
+            <div class="user_info">
+
+                <strong id="sidebarUsername">
+                    SupaSocial User
+                </strong>
+
+                <span id="sidebarStatus">
+                    Logged Out
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         DM APPLICATION
+    =========================================== -->
+
+    <div class="app">
+
+
+        <!-- ======================================
+             DM LIST
+        ======================================= -->
+
+        <div id="dm-list">
+
+            <div class="dm-list-header">
+
+                <strong>
+                    Direct Messages
+                </strong>
+
+            </div>
+
+
+            <!-- DM #1 -->
+
+            <button
+                class="dm-item active"
+                data-user-id="user-1"
+            >
+
+                <div class="dm-avatar">
+
+                    <img
+                        src="../../../CDN/User64.png"
+                        width="40"
+                    >
+
+                </div>
+
+
+                <div class="dm-info">
+
+                    <strong>
+                        Example User
+                    </strong>
+
+                    <span>
+                        Last message...
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <!-- DM #2 -->
+
+            <button
+                class="dm-item"
+                data-user-id="user-2"
+            >
+
+                <div class="dm-avatar">
+
+                    <img
+                        src="../../../CDN/User64.png"
+                        width="40"
+                    >
+
+                </div>
+
+
+                <div class="dm-info">
+
+                    <strong>
+                        Another User
+                    </strong>
+
+                    <span>
+                        Hello!
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <!-- DM #3 -->
+
+            <button
+                class="dm-item"
+                data-user-id="user-3"
+            >
+
+                <div class="dm-avatar">
+
+                    <img
+                        src="../../../CDN/User64.png"
+                        width="40"
+                    >
+
+                </div>
+
+
+                <div class="dm-info">
+
+                    <strong>
+                        SupaSocial
+                    </strong>
+
+                    <span>
+                        Welcome to DMs
+                    </span>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ======================================
+             CONTENT OF SELECTED DM
+        ======================================= -->
+
+        <div id="dm-content">
+
+
+            <!-- HEADER -->
+
+            <header id="header">
+
+                <div class="channel_title">
+
+                    <span class="channel_hash">
+                        @
+                    </span>
+
+                    <h1 id="dmUsername">
+                        Example User
+                    </h1>
+
+                </div>
+
+
+                <div class="header_actions">
+
+                    <button
+                        type="button"
+                        title="Notifications"
+                    >
+                        🔔
+                    </button>
+
+
+                    <button
+                        type="button"
+                        title="Help"
+                    >
+                        ?
+                    </button>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ==================================
+                 MESSAGES
+            =================================== -->
+
+            <main id="content">
+
+
+                <!-- MESSAGE -->
+
+                <article class="post">
+
+                    <div class="post_avatar">
+
+                        <img
+                            src="../../../CDN/User64.png"
+                            width="40"
+                        >
+
+                    </div>
+
+
+                    <div class="post_body">
+
+                        <div class="post_header">
+
+                            <span class="post_user">
+                                Example User
+                            </span>
+
+                            <span class="post_date">
+                                Today
+                            </span>
+
+                        </div>
+
+
+                        <div class="post_content">
+
+                            Hello!
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- ANOTHER MESSAGE -->
+
+                <article class="post">
+
+                    <div class="post_avatar">
+
+                        <img
+                            src="../../../CDN/User64.png"
+                            width="40"
+                        >
+
+                    </div>
+
+
+                    <div class="post_body">
+
+                        <div class="post_header">
+
+                            <span class="post_user">
+                                You
+                            </span>
+
+                            <span class="post_date">
+                                Today
+                            </span>
+
+                        </div>
+
+
+                        <div class="post_content">
+
+                            Hey!
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </main>
+
+
+
+            <!-- ==================================
+                 MESSAGE INPUT
+            =================================== -->
+
+            <div id="message_bar">
+
+                <button
+                    class="message_add"
+                    type="button"
+                >
+                    ＋
+                </button>
+
+
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Message Example User"
+                    autocomplete="off"
+                    maxlength="2000"
+                >
+
+
+                <button
+    class="message_button"
+    id="sendMessageButton"
+    type="button"
+    title="Send"
+>
+    <img
+        src="../../../CDN/SendIco.png"
+        width="26"
+    >
+</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="Scripts_0FA9.js"></script>
+
+</body>
+
+</html>
