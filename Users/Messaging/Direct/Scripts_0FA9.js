@@ -30,25 +30,66 @@ let selectedUser = null;
 // GET CURRENT USER
 // ==========================================
 
-async function getCurrentUser()
-{
-    const {
-        data,
-        error
-    } = await supabaseClient.auth.getUser();
+ async function getCurrentUser() {
+            const { data: { user }, error } = await supabaseClient.auth.getUser();
+            if (error) {
+                console.error("Unable to get current user:", error);
+                return null;
+            }
+            return user;
+        }
 
-    if (error)
-    {
-        console.error(
-            "Could not get current user:",
-            error
-        );
+        async function getCurrentProfile() {
+            const user = await getCurrentUser();
+            if (!user) return null;
 
-        return null;
-    }
+            const { data: profile, error } = await supabaseClient
+                .from("profiles")
+                .select("username, is_platformadmin")
+                .eq("id", user.id)
+                .single();
 
-    return data.user;
-}
+            if (error) {
+                console.error("Unable to load profile:", error);
+                return null;
+            }
+            return profile;
+        }
+
+        async function updateLoginUI() {
+            const user = await getCurrentUser();
+            const loggedInElements = document.querySelectorAll(".loggedInShow");
+            const loggedOutElements = document.querySelectorAll(".loggedInHide");
+            const usernameDisplay = document.getElementById("sidebarUsername");
+            const statusDisplay = document.getElementById("sidebarStatus");
+
+            if (user) {
+                loggedInElements.forEach(element => element.style.display = "");
+                loggedOutElements.forEach(element => element.style.display = "none");
+
+                const profile = await getCurrentProfile();
+                const username = profile?.username || "User";
+
+                if (usernameDisplay) usernameDisplay.textContent = username;
+                if (statusDisplay) statusDisplay.textContent = "Logged In";
+                document.title = "SupaSocial | Logged In";
+            } else {
+                loggedInElements.forEach(element => element.style.display = "none");
+                loggedOutElements.forEach(element => element.style.display = "");
+
+                if (usernameDisplay) usernameDisplay.textContent = "Guest";
+                if (statusDisplay) statusDisplay.textContent = "Logged Out";
+                document.title = "SupaSocial | Logged Out";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            await updateLoginUI();
+        });
+
+        supabaseClient.auth.onAuthStateChange(async function () {
+            await updateLoginUI();
+        });
 
 
 // ==========================================
@@ -60,7 +101,19 @@ async function loadDMList()
     const dmList =
         document.getElementById("dm-list");
 
-    dmList.innerHTML = "";
+    if (!dmList)
+    {
+        console.error("DM list element not found.");
+        return;
+    }
+
+    dmList.innerHTML = `
+        <div class="dm-list-header">
+            <strong>Direct Messages</strong>
+        </div>
+
+        <p>Loading users...</p>
+    `;
 
 
     const {
@@ -71,7 +124,9 @@ async function loadDMList()
             .from("profiles")
             .select("id, username")
             .neq("id", currentUser.id)
-            .order("username");
+            .order("username", {
+                ascending: true
+            });
 
 
     if (error)
@@ -81,17 +136,30 @@ async function loadDMList()
             error
         );
 
-        dmList.innerHTML =
-            "<p>Unable to load users.</p>";
+        dmList.innerHTML = `
+            <div class="dm-list-header">
+                <strong>Direct Messages</strong>
+            </div>
+
+            <p>Unable to load users.</p>
+        `;
 
         return;
     }
 
 
+    dmList.innerHTML = `
+        <div class="dm-list-header">
+            <strong>Direct Messages</strong>
+        </div>
+    `;
+
+
     if (!users || users.length === 0)
     {
-        dmList.innerHTML =
-            "<p>No users available.</p>";
+        dmList.innerHTML += `
+            <p>No users available.</p>
+        `;
 
         return;
     }
@@ -114,20 +182,23 @@ async function loadDMList()
             </div>
 
             <div class="dm-info">
-
                 <strong></strong>
 
                 <span>
                     Start a conversation
                 </span>
-
             </div>
         `;
 
 
-        button
-            .querySelector("strong")
-            .textContent = user.username;
+        const username =
+            button.querySelector("strong");
+
+        if (username)
+        {
+            username.textContent =
+                user.username;
+        }
 
 
         button.addEventListener(
@@ -153,19 +224,27 @@ async function openDM(user)
     selectedUser = user;
 
 
-    document
-        .getElementById("dmUsername")
-        .textContent = user.username;
+    const username =
+        document.getElementById("dmUsername");
+
+    if (username)
+    {
+        username.textContent =
+            user.username;
+    }
 
 
-    document
-        .getElementById("messageInput")
-        .placeholder =
+    const input =
+        document.getElementById("messageInput");
+
+    if (input)
+    {
+        input.placeholder =
             "Message " + user.username;
+    }
 
 
-    // Highlight selected conversation
-
+    // Remove active state
     document
         .querySelectorAll(".dm-item")
         .forEach(item =>
@@ -174,23 +253,23 @@ async function openDM(user)
         });
 
 
-    const buttons =
-        document.querySelectorAll(".dm-item");
-
-
-    buttons.forEach(button =>
-    {
-        const username =
-            button.querySelector("strong");
-
-        if (
-            username &&
-            username.textContent === user.username
-        )
+    // Find selected user
+    document
+        .querySelectorAll(".dm-item")
+        .forEach(button =>
         {
-            button.classList.add("active");
-        }
-    });
+            const usernameElement =
+                button.querySelector("strong");
+
+            if (
+                usernameElement &&
+                usernameElement.textContent ===
+                    user.username
+            )
+            {
+                button.classList.add("active");
+            }
+        });
 
 
     await loadMessages();
@@ -203,7 +282,7 @@ async function openDM(user)
 
 async function loadMessages()
 {
-    if (!selectedUser)
+    if (!currentUser || !selectedUser)
     {
         return;
     }
@@ -212,7 +291,17 @@ async function loadMessages()
     const content =
         document.getElementById("content");
 
+    if (!content)
+    {
+        console.error(
+            "Content element not found."
+        );
 
+        return;
+    }
+
+
+    // Clear old messages ONCE
     content.innerHTML = "";
 
 
@@ -254,6 +343,19 @@ async function loadMessages()
     }
 
 
+    if (!messages || messages.length === 0)
+    {
+        content.innerHTML = `
+            <div class="dm-empty">
+                No messages yet.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // Display EVERY message
     messages.forEach(message =>
     {
         displayMessage(message);
@@ -273,6 +375,15 @@ function displayMessage(message)
     const content =
         document.getElementById("content");
 
+    if (!content)
+    {
+        console.error(
+            "Content element not found."
+        );
+
+        return;
+    }
+
 
     const article =
         document.createElement("article");
@@ -281,13 +392,23 @@ function displayMessage(message)
 
 
     const isMine =
-        message.sender_id === currentUser.id;
+        message.sender_id ===
+        currentUser.id;
 
 
-    const username =
-        isMine
-            ? "You"
-            : selectedUser.username;
+    let username =
+        "Unknown User";
+
+
+    if (isMine)
+    {
+        username = "You";
+    }
+    else if (selectedUser)
+    {
+        username =
+            selectedUser.username;
+    }
 
 
     const date =
@@ -326,50 +447,10 @@ function displayMessage(message)
     `;
 
 
+    // IMPORTANT:
+    // Only append the message.
+    // Do NOT clear content here.
     content.appendChild(article);
-
-    users.forEach((user, index) =>
-{
-    const button =
-        document.createElement("button");
-
-    button.className = "dm-item";
-
-    button.innerHTML = `
-        <div class="dm-avatar">
-            <img
-                src="../../../CDN/User64.png"
-                width="40"
-            >
-        </div>
-
-        <div class="dm-info">
-            <strong></strong>
-            <span>Start a conversation</span>
-        </div>
-    `;
-
-    button
-        .querySelector("strong")
-        .textContent = user.username;
-
-    button.addEventListener(
-        "click",
-        () =>
-        {
-            openDM(user);
-        }
-    );
-
-    dmList.appendChild(button);
-
-
-    // Automatically open the first user
-    if (index === 0)
-    {
-        openDM(user);
-    }
-});
 }
 
 
@@ -379,6 +460,12 @@ function displayMessage(message)
 
 async function sendMessage()
 {
+    if (!currentUser)
+    {
+        return;
+    }
+
+
     if (!selectedUser)
     {
         return;
@@ -389,6 +476,15 @@ async function sendMessage()
         document.getElementById(
             "messageInput"
         );
+
+    if (!input)
+    {
+        console.error(
+            "Message input not found."
+        );
+
+        return;
+    }
 
 
     const message =
@@ -411,9 +507,14 @@ async function sendMessage()
         await supabaseClient
             .from("direct_messages")
             .insert({
-                sender_id: currentUser.id,
-                recipient_id: selectedUser.id,
-                content: message
+                sender_id:
+                    currentUser.id,
+
+                recipient_id:
+                    selectedUser.id,
+
+                content:
+                    message
             })
             .select()
             .single();
@@ -440,7 +541,13 @@ async function sendMessage()
     input.value = "";
 
 
-    // Add message immediately
+    /*
+        Display immediately.
+
+        The realtime handler below ignores
+        our own messages, so this will not
+        create a duplicate.
+    */
 
     displayMessage(data);
 
@@ -452,9 +559,25 @@ async function sendMessage()
 // ENTER TO SEND
 // ==========================================
 
-document
-    .getElementById("messageInput")
-    .addEventListener(
+function setupMessageInput()
+{
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+
+    if (!input)
+    {
+        console.error(
+            "Message input not found."
+        );
+
+        return;
+    }
+
+
+    input.addEventListener(
         "keydown",
         function(event)
         {
@@ -469,18 +592,36 @@ document
             }
         }
     );
+}
 
 
 // ==========================================
 // SEND BUTTON
 // ==========================================
 
-document
-    .getElementById("sendMessageButton")
-    .addEventListener(
+function setupSendButton()
+{
+    const button =
+        document.getElementById(
+            "sendMessageButton"
+        );
+
+
+    if (!button)
+    {
+        console.error(
+            "Send button not found."
+        );
+
+        return;
+    }
+
+
+    button.addEventListener(
         "click",
         sendMessage
     );
+}
 
 
 // ==========================================
@@ -504,7 +645,10 @@ function setupRealtime()
                     payload.new;
 
 
-                if (!selectedUser)
+                if (
+                    !currentUser ||
+                    !selectedUser
+                )
                 {
                     return;
                 }
@@ -514,6 +658,7 @@ function setupRealtime()
                     (
                         message.sender_id ===
                             currentUser.id &&
+
                         message.recipient_id ===
                             selectedUser.id
                     )
@@ -521,6 +666,7 @@ function setupRealtime()
                     (
                         message.sender_id ===
                             selectedUser.id &&
+
                         message.recipient_id ===
                             currentUser.id
                     );
@@ -532,8 +678,13 @@ function setupRealtime()
                 }
 
 
-                // Don't display our own message twice
-                // because sendMessage() already displayed it.
+                /*
+                    sendMessage() already displays
+                    our own message.
+
+                    Therefore only display messages
+                    coming FROM the other user.
+                */
 
                 if (
                     message.sender_id ===
@@ -560,7 +711,16 @@ function setupRealtime()
 function scrollMessagesToBottom()
 {
     const content =
-        document.getElementById("content");
+        document.getElementById(
+            "content"
+        );
+
+
+    if (!content)
+    {
+        return;
+    }
+
 
     content.scrollTop =
         content.scrollHeight;
@@ -576,7 +736,8 @@ function escapeHTML(value)
     const div =
         document.createElement("div");
 
-    div.textContent = value;
+    div.textContent =
+        value ?? "";
 
     return div.innerHTML;
 }
@@ -610,8 +771,23 @@ async function initializeDMs()
 
     await loadDMList();
 
+
+    setupMessageInput();
+
+    setupSendButton();
+
     setupRealtime();
 }
 
 
-initializeDMs();
+// ==========================================
+// START
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () =>
+    {
+        initializeDMs();
+    }
+);
