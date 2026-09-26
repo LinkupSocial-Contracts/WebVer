@@ -12,7 +12,7 @@
 
     <!-- Discord / Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Linkup Social">
+    <meta property="og:title" content="SupaSocial">
     <meta property="og:description"
           content="Connect with people and share posts on SupaSocial.">
     <meta property="og:url"
@@ -27,12 +27,63 @@
     <meta name="twitter:image"
           content="https://linkupsocial-contracts.github.io/WebVer/CDN/Supabase64.png">
 
-    <title>Linkup Social | Direct Messages</title>
+    <title>SupaSocial | NO ACCESS</title>
 
     <link rel="stylesheet"
           href="../../../style_0FA1.css">
     <link rel="stylesheet" href="styles_0FA9.css">
+    <style>
+        .bad_btn
+        {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 1px;
+            background-color: red;
+            color: white;
+            font-weight: bold;
+            width: 150px;
+        }
+        #Headblock 
+        {
+            width: 750px;
+        }
+        .bad_btn:hover
+        {
+            background-color: rgb(250,0,0);
+        }
+        .DMListHide
+        {
+            background-color: white;
+            margin: 0;
+            min-height: 100vh;       /* Ensures the page takes up the full screen height */
+            display: flex;
+            justify-content: center; /* Horizontally centers content */
+            align-items: center;     /* Vertically centers content */
+        }
+        .DMListXCard
+        {
+            background-color: red;
+            color: white;
+            border-radius: 40px;
+            height: 50%;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            align-content: center;
+        }
+        @media screen and (max-width: 750px) {
+    .DMListXCard {
+        width: 100%;
+    }
+
+    #sidebar {
+        display: none;
+    }
+}
+    </style>
 </head>
+
 
 <body>
 
@@ -66,7 +117,7 @@
                class="sidebar_btn">
 
                 <span class="sidebar_icon">
-                    ⌂
+                    <img src="../../../CDN/Home64.png" width="24">
                 </span>
 
                 Home
@@ -75,10 +126,10 @@
 
 
             <a href="?isfriend=false"
-               class="sidebar_btn">
+               class="sidebar_btn active">
 
-                <span class="sidebar_icon">
-                    ♧
+                <span class="sidebar_icon ">
+                    <img src="../../../CDN/Friend64.png" width="24">
                 </span>
 
                 Friends
@@ -90,11 +141,19 @@
                class="sidebar_btn">
 
                 <span class="sidebar_icon">
-                    🔔
+                    <img src="../../../CDN/Bell64.png" width="24">
                 </span>
 
                 Notifications
 
+            </a>
+            <a href="../../../Help/Whats-New/" class="sidebar_btn
+            ">
+
+                <span class="sidebar_icon">
+                    <img src="../../../CDN/New64.png" width="24">
+                </span>
+                Whats New
             </a>
 
         </div>
@@ -194,11 +253,17 @@
 
 
 
-    <!-- ==========================================
-         DM APPLICATION
-    =========================================== -->
-
-    <div class="app">
+   
+    <div class="app loggedInHide DMListHide">
+        <div class="DMListXCard">
+            <h1>You Do Not Have Access To This Page</h1>
+            <p style="font-weight: bolder;">Please Login To Gain Access</p>
+            <button class="bad_btn" onclick="window.location.href = '../../../Auth/Signin/'">Login</button>
+            <button class="bad_btn" onclick="window.location.href = '../../../'">Home</button>
+        </div>
+        
+    </div>
+    <div class="app loggedInShow" style="display: none;">
 
 
         <!-- ======================================
@@ -215,50 +280,15 @@
 
             </div>
 
-
-            <!-- DM #1 -->
-
-            <button
-                class="dm-item active"
-                data-user-id="user-1"
-            >
-
-                <div class="dm-avatar">
-
-                    <img
-                        src="../../../CDN/User64.png"
-                        width="40"
-                    >
-
-                </div>
-
-
-                <div class="dm-info">
-
-                    <strong>
-                        Example User
-                    </strong>
-
-                    <span>
-                        Last message...
-                    </span>
-
-                </div>
-
-            </button>
-
-
-            <!-- DM #2 -->
-
             <button
                 class="dm-item"
-                data-user-id="user-2"
+                data-user-id="null"
             >
 
                 <div class="dm-avatar">
 
                     <img
-                        src="../../../CDN/User64.png"
+                        src="../../../CDN/Supabase64.png"
                         width="40"
                     >
 
@@ -268,43 +298,11 @@
                 <div class="dm-info">
 
                     <strong>
-                        Another User
+                        Loading..
                     </strong>
 
                     <span>
-                        Hello!
-                    </span>
-
-                </div>
-
-            </button>
-
-
-            <!-- DM #3 -->
-
-            <button
-                class="dm-item"
-                data-user-id="user-3"
-            >
-
-                <div class="dm-avatar">
-
-                    <img
-                        src="../../../CDN/User64.png"
-                        width="40"
-                    >
-
-                </div>
-
-
-                <div class="dm-info">
-
-                    <strong>
-                        SupaSocial
-                    </strong>
-
-                    <span>
-                        Welcome to DMs
+                        No Information
                     </span>
 
                 </div>
@@ -333,7 +331,7 @@
                     </span>
 
                     <h1 id="dmUsername">
-                        Example User
+                        No User Selected
                     </h1>
 
                 </div>
@@ -345,7 +343,7 @@
                         type="button"
                         title="Notifications"
                     >
-                        🔔
+                        <img src="../../../CDN/Bell64.png" width="24">
                     </button>
 
 
@@ -367,89 +365,7 @@
             =================================== -->
 
             <main id="content">
-
-
-                <!-- MESSAGE -->
-
-                <article class="post">
-
-                    <div class="post_avatar">
-
-                        <img
-                            src="../../../CDN/User64.png"
-                            width="40"
-                        >
-
-                    </div>
-
-
-                    <div class="post_body">
-
-                        <div class="post_header">
-
-                            <span class="post_user">
-                                Example User
-                            </span>
-
-                            <span class="post_date">
-                                Today
-                            </span>
-
-                        </div>
-
-
-                        <div class="post_content">
-
-                            Hello!
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- ANOTHER MESSAGE -->
-
-                <article class="post">
-
-                    <div class="post_avatar">
-
-                        <img
-                            src="../../../CDN/User64.png"
-                            width="40"
-                        >
-
-                    </div>
-
-
-                    <div class="post_body">
-
-                        <div class="post_header">
-
-                            <span class="post_user">
-                                You
-                            </span>
-
-                            <span class="post_date">
-                                Today
-                            </span>
-
-                        </div>
-
-
-                        <div class="post_content">
-
-                            Hey!
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
+                <h3 style="align-items: center; align-self: center; align-content: center;">Select A User</h3>
             </main>
 
 
@@ -471,7 +387,7 @@
                 <input
                     type="text"
                     id="messageInput"
-                    placeholder="Message Example User"
+                    placeholder="No User To Message Yet"
                     autocomplete="off"
                     maxlength="2000"
                 >

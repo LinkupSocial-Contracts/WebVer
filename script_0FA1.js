@@ -265,3 +265,5 @@ const SUPABASE_URL = "https://paotmlgoayixvwozvohp.supabase.co";
         supabaseClient.auth.onAuthStateChange(async function () {
             await updateLoginUI();
         });
+
+       const timer = setInterval(loadPosts, 10000);

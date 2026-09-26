@@ -1,0 +1,33 @@
+<!Doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 id="rdt_txt">Redirecting In 4</h1>
+    </body>
+    <script>
+        const textelem = document.getElementById("rdt_txt");
+        const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        async function jeef()
+        {
+        console.log("4")
+        await wait(1000)
+        textelem.innerText == "Redirecting In 3"
+        console.log("3")
+        await wait(1000)
+        textelem.innerText == "Redirecting In 2"
+        console.log("2")
+        await wait(1000)
+        textelem.innerText == "Redirecting In 1"
+        console.log("1")
+        await wait(1000)
+        textelem.innerText == "Redirecting In 0"
+        console.log("0")
+        window.location.href = '../../';
+        await wait(1000)
+        textelem.innerText = "If You Are Still Seeing This Please Contact Our Help Desk" 
+        console.log("Error")
+        }
+        jeef();
+    </script>
+</html>
