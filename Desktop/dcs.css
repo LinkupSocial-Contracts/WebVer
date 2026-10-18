@@ -1,0 +1,26 @@
+.SupaSocial_btn
+{
+    background-color: #5865f2;
+    border-color: transparent;
+    color: whitesmoke;
+    padding: 3px;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.SupaSocial_btn:hover
+{
+    cursor: pointer;
+    padding: 3px;
+    background-color: #4852be;
+}
+
+.SupaSocial_a
+{
+    background-color: #4852be;
+    color: whitesmoke;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 2px;
+    text-decoration: none;
+}

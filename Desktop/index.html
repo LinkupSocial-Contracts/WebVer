@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-us" theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+          
+    <meta name="description"
+          content="Connect with people and share posts on SupaSocial.">
+
+    <!-- Discord / Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SupaSocial">
+    <meta property="og:description"
+          content="Connect with people and share posts on SupaSocial.">
+    <meta property="og:url"
+          content="https://linkupsocial-contracts.github.io/WebVer/">
+    <meta property="og:image"
+          content="https://linkupsocial-contracts.github.io/WebVer/CDN/Supabase64.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SupaSocial">
+    <meta name="twitter:description"
+          content="Connect with people and share posts on SupaSocial.">
+    <meta name="twitter:image"
+          content="https://linkupsocial-contracts.github.io/WebVer/CDN/Supabase64.png">
+
+    <title>Supasocial | Whats New</title>
+
+    <link rel="stylesheet"
+          href="../style_0FA1.css">
+    <link rel="stylesheet" href="./dcs.css">
+    <style>
+        html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.app {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+        .whats_new_information 
+        {
+            padding-left: 15px;
+            margin: 25px;
+        }
+        .fix_date
+        {
+            font-weight: lighter;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MAIN SIDEBAR
+    =========================================== -->
+
+    <aside id="sidebar">
+
+        <div class="sidebar_brand">
+
+            <div class="brand_icon">
+                <img
+                    src="../CDN/Supabase64.png"
+                    width="24"
+                >
+            </div>
+
+            <span>SupaSocial</span>
+
+        </div>
+
+
+        <div class="sidebar_section">
+
+            <span class="sidebar_title">
+                SUPASOCIAL
+            </span>
+
+            <a href="../"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    <img src="../CDN/Home64.png" width="24">
+                </span>
+
+                Home
+
+            </a>
+
+
+            <a href="../Users/Messaging/Direct/"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    <img src="../CDN/Friend64.png" width="24">
+                </span>
+
+                Friends
+
+            </a>
+            <a href="#"
+               class="sidebar_btn">
+
+                <span class="sidebar_icon">
+                    <img src="../CDN/Bell64.png" width="24">
+                </span>
+
+                Notifications
+
+            </a>
+            <a href="../Help/Whats-New/" class="sidebar_btn
+            ">
+
+                <span class="sidebar_icon">
+                    <img src="../CDN/New64.png" width="24">
+                </span>
+                Whats New
+            </a>
+            <a href="../Help/Whats-New/Beta/" class="sidebar_btn active">
+                <span class="sidebar_icon">
+                    <img src="../CDN/Supabase64_White.png" width="24">
+                </span>Downloads</a>
+            
+
+        </div>
+        <div class="sidebar_user"><h4 style="color: whitesmoke;">Download</h4></div>
+    </aside>
+
+
+
+    <!-- ==========================================
+         DM APPLICATION
+    =========================================== -->
+
+    <div class="app" style="width: 100%;">
+        <header id="header">
+            <div class="channel_title">
+                <span class="channel_hash"><img src="../CDN/Supabase64_White.png" width="24"></span>
+                <h1>Download Official Desktop Application</h1>
+            </div>
+
+            <div class="header_actions">
+                <button title="Notifications"><img src="../CDN/Bell64.png" width="24"></button>
+                <button title="Help">?</button>
+            </div>
+        </header>
+        <article class="post">
+                <div class="post_avatar"><img src="../CDN/Supabase64.png" width="24"></div>
+                <div class="post_body">
+                    <div class="post_header">
+                        <span class="post_user">Latest Release</span>
+                        <span class="post_date">V1.0</span>
+                </div>
+                <div class="post_content">
+                   <p>
+                        Download The Desktop Application To Get Advanced Features Like Image Sending.<br>
+                        Also On The Desktop Application You Have The Chance To Become A Moderator For SupaSocial.<br>
+                        If There Are Any Errors With The Application Or Logging In To It Contact Us By Visiting Our Help Center.<br>
+                        You Will Notice There Is A Button Named "Help", That Is Our Help Center.
+                    </p>
+                     <button class="SupaSocial_btn" onclick"= window.location.href = './Help'">Help</button>
+                    <button class="SupaSocial_btn" id="btnDownload" onclick="JsDownloadDesktop()">Download</button>
+                    <p class="fix_date">
+                        Updated 10/18/2026<br>Version 1.0 Build 1096.2
+                    </p>
+                </div>
+            </div>
+        </article>
+        <div id="blank_foot"></div>
+    </div>
+    <script src="djs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</body>
+
+</html>
